@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 from .models import Album
 
 # Create your views here.
@@ -11,13 +12,26 @@ class MusicPageView(TemplateView):
 class SingleMusicPageView(TemplateView):
     template_name = "singleMusic.html"
 
+# def index(request):
+#     all_albums = Album.objects.all()
+#     html = ''
+#     for album in all_albums:
+#         url = '/music/' + str(album.id) + '/'
+#         html += '<a href="'+ url +'">'+ album.album_title +'</a><br>'
+#     return HttpResponse(html) 
+
+# def index(request):
+#     all_albums = Album.objects.all()
+#     temp = loader.get_template('music/index.html')
+#     contex = {
+#         'all_albums': all_albums,
+#     }
+#     return HttpResponse(temp.render(contex, request))
+
 def index(request):
     all_albums = Album.objects.all()
-    html = ''
-    for album in all_albums:
-        url = '/music/' + str(album.id) + '/'
-        html += '<a href="'+ url +'">'+ album.album_title +'</a><br>'
-    return HttpResponse(html)    
+    contex = {'all_albums': all_albums}
+    return render(request, 'music/index.html', contex)
 
 def indexOld(request):
     return HttpResponse("<h1>This will be a list of all Albums</h1>")

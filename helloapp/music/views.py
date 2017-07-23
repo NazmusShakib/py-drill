@@ -3,6 +3,8 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.template import loader
 from .models import Album
+import pprint
+from var_dump import var_dump
 
 # Create your views here.
 from django.views.generic import TemplateView
